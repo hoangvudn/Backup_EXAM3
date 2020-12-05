@@ -1,0 +1,50 @@
+body {
+    width: 50%;
+    height: 100vh;
+ 
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    
+
+}
+ul li {
+    background: chartreuse;
+    margin-bottom: 5px;
+    width: 100px;
+}
+.div-form {
+    margin-top: 100px;
+    padding-bottom: 25px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+form div {
+    display: flex;
+    padding-bottom: 8px;
+}
+form div input {
+    width: 200px;
+    margin-left: 10px;
+}
+.btn input{
+    width: 100px;
+    height: 50px;
+    
+}
+.btn {
+    padding-top: 20px;
+}
+.listTable {
+    width: 500px;
+}
+#table {
+    width: 600px;
+    border: 1px solid gray;
+}
+#table tr td{
+    border: 1px solid gray; 
+}
+

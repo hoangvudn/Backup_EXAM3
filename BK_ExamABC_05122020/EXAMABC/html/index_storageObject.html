@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>EXAM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <div style="display: flex; flex-direction: column;">
+            <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <div style="display: flex; flex-direction: column;">
+        <label for="">Name</label>
+          <input type="text" id="name"  required>
+        <label for="">Phone</label>
+          <input type="text" id="phone" required>
+        <label for="">Mail</label>
+          <input type="text" id="mail"  required>
+        <label for="">Age</label>
+          <input type="text" id="age" required>
+        <label for="">Role</label>
+          <input type="text" id="role" required>
+        <label for="">Salary</label>
+          <input type="text" id="salary"  required>
+      </div>
+      <div>
+          <p id="pName"></p>
+          <p id="pPhone"></p>
+      </div>
+      <div>
+        <textarea name="" id="listName" cols="5" rows="5"></textarea>
+        <textarea name="" id="listPhone" cols="5" rows="5"></textarea>
+        <textarea name="" id="listMail" cols="5" rows="5"></textarea>
+        <textarea name="" id="listAge" cols="5" rows="5"></textarea>
+        <textarea name="" id="listSalary" cols="5" rows="5"></textarea>
+      </div>
+     
+      <div>
+        <input type="button" id="save" value="save">
+        <input type="button" id="show" value="show">
+      </div>
+   
+       <script>
+              var $ = function(id) { return document.getElementById(id); };
+              var taskListName = [];
+              var taskListPhone = [];
+              var taskListMail = [];
+              var taskListAge = [];
+              var taskListSalary = [];
+
+              var showEmplooy = function() {
+                  var name = "" ;
+                  /*var phone = "";
+                  var mail = "";
+                  var age = "";
+                  var salary="";*/
+                  if ((taskListName.length === 0) && (taskListPhone.length === 0) && (taskListMail.length === 0) && (taskListAge.length === 0) && (taskListSalary.length === 0))
+                  {
+                    var stName = localStorage.getItem("name") || "[]";
+                    var stPhone = localStorage.getItem("phone") || "[]";
+                    var stMail = localStorage.getItem("mail") || "[]";
+                    var stAge = localStorage.getItem("age") || "[]";
+                    var stSalary = localStorage.getItem("salary") || "[]";
+
+                    taskListName = JSON.parse(stName);
+                    taskListPhone = JSON.parse(stPhone);
+                    taskListMail = JSON.parse(stMail);
+                    taskListAge = JSON.parse(stAge);
+                    taskListSalary = JSON.parse(stSalary);
+                  }
+
+                    if ((taskListName.length > 0) && (taskListPhone.length > 0) && (taskListMail.length > 0) && (taskListAge.length > 0) && (taskListSalary.length > 0)) {
+                        taskListName.sort();
+                        name = taskListName.join("\n");
+                        taskListPhone.sort();
+                        taskListMail.sort();
+                        taskListAge.sort();
+                        taskListSalary.sort();
+                       
+                        phone = taskListPhone.join("\n");
+                        mail = taskListMail.join("\n");
+                        age = taskListAge.join("\n");
+                        salary = taskListSalary.join("\n");
+                     }
+                     $("listName").value = name;
+                     $("listPhone").value = phone;
+                     $("listMail").value = mail;
+                     $("listAge").value = age;
+                     $("listSalary").value = salary;
+                     $("pName").innerHTML = name;
+                     $("pPhone").innerHTML = phone;
+                    
+                   
+              };
+              //-------------------------------------------------------
+              var  addEmplooy = function(){
+                  var taskName = $("name");
+                  var taskPhone = $("phone");
+                  var taskMail = $("mail");
+                  var taskAge = $("age");
+                  var taskSalary = $("salary");
+
+                  if ((taskName.value !== "")  && (taskMail.value !== "") && (taskPhone.value !== "") && (taskAge.value !== "") && (taskSalary.value !== "")){
+                     taskListName.push(taskName.value);
+                     taskListPhone.push(taskPhone.value);
+                     taskListMail.push(taskMail.value);
+                     taskListAge.push(taskAge.value);
+                     taskListSalary.push(taskSalary.value);
+                     localStorage.setItem("name", JSON.stringify(taskListName));
+                     localStorage.setItem("phone", JSON.stringify(taskListPhone));
+                     localStorage.setItem("mail", JSON.stringify(taskListMail));
+                     localStorage.setItem("age", JSON.stringify(taskListAge));
+                     localStorage.setItem("salary", JSON.stringify(taskListSalary));
+                        
+                     taskName.value="";
+                     taskPhone.value="";
+                     taskMail.value="";
+                     taskAge.value="";
+                     taskSalary.value="";
+                     showEmplooy();
+                  }
+              }
+              window.onload = function(){
+                  $("save").onclick = addEmplooy;
+                  //$("show").onclick = showEmplooy;
+                  showEmplooy();
+              }
+       </script>
+    </body>
+</html>

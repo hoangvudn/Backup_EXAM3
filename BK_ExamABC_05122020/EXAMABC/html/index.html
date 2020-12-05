@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>EXAM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <div style="display: flex; flex-direction: column;">
+            <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <!-------------------------------------------------------------->
+      <div class ="div-form">
+        <form action="">
+          <div>
+             <label for="">Name</label>
+             <input type="text" id="name"  required>
+             <label id="errorMessengerName">&nbsp;</label>
+          </div>
+          <div>
+             <label for="">Phone</label>
+             <input type="text" id="phone" required>
+             <label id="errorMessengerPhone">&nbsp;</label>
+          </div>
+           <div>
+             <label for="">Mail</label>
+             <input type="email" id="mail"  required>
+             <label id="errorMessengerMail">&nbsp;</label>
+           </div>
+           <div>
+             <label for="">Age</label>
+             <input type="number" id="age" min="20" max="100" required>
+             <label id="errorMessengerAge">&nbsp;</label>
+           </div>
+           <div>
+             <label for="">Role</label>
+             <select name="" id="role">
+                 <option value="fe">FE</option>
+                 <option value="be">BE</option>
+                 <option value="qa">QA</option>
+                 <option value="pm">PM</option>
+             </select>
+             <label id="errorMessengerRole">&nbsp;</label>
+           </div>
+           <div>
+             <label for="">Salary</label>
+             <input type="number" id="salary"  required>
+             <label id="errorMessengerSalary">&nbsp;</label>
+           </div>
+        </form>
+        <div class="btn">
+              <input type="button" id="save" value="save">
+              <input type="button" id="clear" value="clear">
+              <input type="button" id="addStaff" value="add staff">
+         </div>
+      </div>
+      <!-------------------------------------------------------------->
+      <div class="listTable">
+        <table id="table">
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Mail</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Salary</th>
+            <th>Income</th>
+          </tr>
+        </table>
+      </div>
+      <!-------------------------------------------------------------->
+      <p id="itemName"></p>
+      <p id="itemPhone"></p>
+      <!-------------------------------------------------------------->
+      <ul id="notes"></ul>
+      <!-------------------------------------------------------------->
+      <script src="processData.js" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>EXAM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <div style="display: flex; flex-direction: column;">
+            <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <!-------------------------------------------------------------->
+      <div style="display: flex; flex-direction: column;">
+        <label for="">Name</label>
+          <input type="text" id="name"  required>
+        <label for="">Phone</label>
+          <input type="text" id="phone" required>
+        <label for="">Mail</label>
+          <input type="text" id="mail"  required>
+        <label for="">Age</label>
+          <input type="text" id="age" required>
+        <label for="">Role</label>
+          <input type="text" id="role" required>
+        <label for="">Salary</label>
+          <input type="text" id="salary"  required>
+      </div>
+      <!-------------------------------------------------------------->
+      <div>
+        <textarea name="" id="listName" cols="15" rows="5"></textarea>
+        <textarea name="" id="listPhone" cols="5" rows="5"></textarea>
+        <textarea name="" id="listMail" cols="5" rows="5"></textarea>
+        <textarea name="" id="listAge" cols="5" rows="5"></textarea>
+        <textarea name="" id="listSalary" cols="5" rows="5"></textarea>
+      </div>
+      <!-------------------------------------------------------------->
+      <i class="fas fa-dice    ">Icon Facebook</i>
+      <p id="item"></p>
+      <!-------------------------------------------------------------->
+      <div>
+        <input type="button" id="save" value="save">
+        <input type="button" id="show" value="show">
+        <input type="button" id="addStaff" value="add staff">
+      </div>
+      <!-------------------------------------------------------------->
+       <script>
+              var $ = function(id) { return document.getElementById(id); };
+              /*var taskListName = [];
+              var taskListPhone = [];
+              var taskListMail = [];
+              var taskListAge = [];
+              var taskListSalary = [];*/
+              var staffList = [];
+
+              var showEmplooy = function() {
+                  /*var name = "" ;
+                  var phone = "";
+                  var mail= "";
+                  var age = "";
+                  var salary="";*/
+                  list = "";
+                  //--------------------Check data storage staffList------------------------
+                  if (staffList.length !==0 ) {
+                    var stList = localStorage.getItem("staffList") || "[]";
+                    /*var stPhone = localStorage.getItem("phone") || "[]";
+                    var stMail = localStorage.getItem("mail") || "[]";
+                    var stAge = localStorage.getItem("age") || "[]";
+                    var stSalary = localStorage.getItem("salary") || "[]";*/
+                    var stSalary = localStorage.getItem("salary") || "[]";*/
+
+                    staffList = JSON.parse(stList);
+                    /*taskListPhone = JSON.parse(stPhone);
+                    taskListMail = JSON.parse(stMail);
+                    taskListAge = JSON.parse(stAge);
+                    taskListSalary = JSON.parse(stSalary);*/
+
+                    if (staffList.length > 0) {
+                        /*taskListName.sort();
+                        taskListPhone.sort();
+                        taskListMail.sort();
+                        taskListAge.sort();
+                        taskListSalary.sort();*/
+                        staffList.sort();
+                        list = staffList.join("\n");
+                      
+                        /*name = taskListName.join("\n");
+                        phone = taskListPhone.join("\n");
+                        mail = taskListMail.join("\n");
+                        age = taskListAge.join("\n");
+                        salary = taskListSalary.join("\n");*/
+                     }
+                        $("item").value = list;
+                     /*$("listName").value = name;
+                     $("listPhone").value = phone;
+                     $("listMail").value = mail;
+                     $("listAge").value = age;
+                     $("listSalary").value = salary;*/
+                  } 
+              };
+              //------------------CREATE STAFF OBJECT----------------------------------
+              var addStaff = function(){
+                var staffName = $("name");
+                var staffPhone = $("phone");
+                var staffMail = $("mail");
+                var staffAge = $("age");
+                var staffSalary = $("salary");
+                var n = staffName.value;
+                var ph = staffPhone.value;
+                var m = staffMail.value;
+                var a = staffAge.value;
+                var s = staffSalary.value;
+
+                var staff = {
+                            "name": n,
+                            "phone": ph,
+                            "mail": m,
+                            "age": a,
+                            "salary": s
+                          }
+
+                 staffList.push(staff); 
+                 localStorage.setItem("staffList", JSON.stringify(staffList));
+                   
+                   staffName.value = "";
+                   staffPhone.value = "";
+                   staffMail.value = "";
+                   staffAge.value = "";
+                   staffSalary.value = "";
+                   staffName.focus();
+                   showEmplooy();   
+              }
+
+              //-------------------------------------------------------
+              
+              //-------------------------------------------------------
+              /*var  addEmplooy = function(){
+                  var taskName = $("name");
+                  var taskPhone = $("phone");
+                  var taskMail = $("mail");
+                  var taskAge = $("age");
+                  var taskSalary = $("salary");
+
+                  if ((taskName.value !== "")  && (taskMail.value !== "") && (taskPhone.value !== "") && (taskAge.value !== "") && (taskSalary.value !== "")){
+                     taskListName.push(taskName.value);
+                     taskListPhone.push(taskPhone.value);
+                     taskListMail.push(taskMail.value);
+                     taskListAge.push(taskAge.value);
+                     taskListSalary.push(taskSalary.value);
+                     localStorage.setItem("name", JSON.stringify(taskListName));
+                     localStorage.setItem("phone", JSON.stringify(taskListPhone));
+                     localStorage.setItem("mail", JSON.stringify(taskListMail));
+                     localStorage.setItem("age", JSON.stringify(taskListAge));
+                     localStorage.setItem("salary", JSON.stringify(taskListSalary));
+                        
+                     taskName.value="";
+                     taskPhone.value="";
+                     taskMail.value="";
+                     taskAge.value="";
+                     taskSalary.value="";
+                     showEmplooy();
+                  }
+              }*/
+              window.onload = function(){
+                  //$("save").onclick = addEmplooy;
+                  //$("show").onclick = showEmplooy;
+                  $("addStaff").onclick = addStaff;
+                  showEmplooy();
+              }
+       </script>
+    </body>
+</html>

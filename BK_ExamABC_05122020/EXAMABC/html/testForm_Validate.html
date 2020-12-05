@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Test Form in Dom</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styleDOM.css">
+    </head>
+    <body>
+        <main>
+            <h1>Resgister for an Account</h1>
+            <form action="" method="get" name="registration_form" id="registration_form"> 
+                <div class="class-mail">
+                    <label for="email_address">E-mail:</label>
+                    <div class="small-div">
+                        <input type="text" name="email_address" id="email_address" >
+                        <span>*</span><br>
+                    </div>    
+                </div>
+                <div>
+                    <label for="phone">Mobile Phone:</label>
+                    <input type="text" name="phone" id="phone">
+                    <span>*</span><br>
+                </div>
+                <div>
+                    <label for="country">Country:</label>
+                    <div class="small-div1">
+                        <select name="country" id="country">
+                            <option value="0">Select an option</option>
+                            <option value="vn">VIETNAM</option>
+                            <option value="usa">USA</option>
+                            <option value="can">CANADA</option>
+                            <option value="jpa">JAPAN</option>
+                            <option value="hk">HONGKONG</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="Contact me by: ">Contact me by:</label>
+                    <input type="radio" name="contact" id="text">Text
+                    <input type="radio" name="contact" id="email">Email
+                    <input type="radio" name="contact" id="Don't contact me">Don't contact by me
+                </div>
+                <div>
+                    <label for="term">Term of Service:</label>
+                    <input type="checkbox">I accept
+                </div>
+                <div class="small-div2">
+                    <input type="button" id="register" value="Register">
+                    <input type="button" id="reset_form" value="Reset">
+                </div>
+                <div class="disabled">
+                    <label for="email" disabled></label>
+                </div>
+                
+            </form>
+        </main>    
+    </body>
+</html>
+<script>
+    "use strict";
+    var $ = function(id) {return document.getElementById(id);};
+
+    function emailIsValid (email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
+    
+    var processEntries = function() {
+         var isValid = true;
+
+         var email = $("email_address").value;
+         var phone = $("phone").value;
+         var e = $("country").value;
+        
+         /*------------------CHECK VALIDATE EMAIL------------------------------------------------*/
+         if (email == "0"){
+            $("email_address").nextElementSibling.firstChild.nodeValue = "This field is required";
+            isValid = false;
+         }else if (email.length < 15){
+            $("email_address").nextElementSibling.firstChild.nodeValue = " Must be least 15 character"; 
+            isValid = false;  
+         }else if (emailIsValid(email)===false){
+            $("email_address").nextElementSibling.firstChild.nodeValue = " Invalid E-mail"; 
+            isValid = false;  
+         }else {
+            $("email_address").nextElementSibling.firstChild.nodeValue = ""; 
+         }
+         /*----------------END--CHECK VALIDATE EMAIL------------------------------------------------*/
+         /*------------------CHECK VALIDATE PHONE------------------------------------------------*/
+         if (phone == ""){
+            $("phone").nextElementSibling.firstChild.nodeValue = "This field is required";
+            isValid = false;
+         }else if (phone.length < 10){
+            $("phone").nextElementSibling.firstChild.nodeValue = " Must be least 10 character";
+            isValid = false;    
+         }else if(isNaN(phone)){
+            $("phone").nextElementSibling.firstChild.nodeValue = " Must be Number";
+            isValid = false;
+         }else {
+            $("phone").nextElementSibling.firstChild.nodeValue = ""; 
+         }
+            
+          /*----------------END--CHECK VALIDATE SELECT COUNTRY------------------------------------------------*/
+          if (e == "0") {
+             alert("please choose a option");
+             $("country").nextElementSibling.firstChild.nodeValue = "This field is required";
+             return false;
+             isValid = false;
+         }else {
+            $("country").nextElementSibling.firstChild.nodeValue = ""; 
+         } 
+  
+
+         if(isValid == true){
+             $("registration_form").submit();
+             alert("Submit Success")
+         }
+    }
+      var resetForm = function() {
+           $("registration_form").reset();
+           $("email_address").nextElementSibling.firstChild.nodeValue = "*";
+           $("phone").nextElementSibling.firstChild.nodeValue = "*";
+           $("email_address").focus();
+      }
+      window.onload = function(){
+          $("register").onclick = processEntries;
+          $("reset_form").onclick = resetForm;
+          $("email_address").focus();
+      }
+</script>

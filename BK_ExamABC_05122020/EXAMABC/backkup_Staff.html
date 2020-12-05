@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>EXAM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <div style="display: flex; flex-direction: column;">
+            <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <!-------------------------------------------------------------->
+      <div class ="div-form">
+        <form action="">
+          <div>
+             <label for="">Name</label>
+             <input type="text" id="name"  required>
+          </div>
+          <div>
+             <label for="">Phone</label>
+             <input type="text" id="phone" required>
+          </div>
+           <div>
+             <label for="">Mail</label>
+             <input type="text" id="mail"  required>
+           </div>
+           <div>
+             <label for="">Age</label>
+             <input type="text" id="age" required>
+           </div>
+           <div>
+             <label for="">Role</label>
+             <select name="" id="role">
+                 <option value=""></option>
+             </select>
+           </div>
+           <div>
+             <label for="">Salary</label>
+             <input type="text" id="salary"  required>
+           </div>
+        </form>
+        <div class="btn">
+              <input type="button" id="save" value="save">
+              <input type="button" id="show" value="show">
+              <input type="button" id="addStaff" value="add staff">
+         </div>
+      </div>
+      <!-------------------------------------------------------------->
+      <div class="lisTable">
+        <table id="table">
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Mail</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Salary</th>
+          </tr>
+        </table>
+      </div>
+      <!-------------------------------------------------------------->
+      <p id="itemName"></p>
+      <p id="itemPhone"></p>
+      <!-------------------------------------------------------------->
+  
+      <!-------------------------------------------------------------->
+       <script>
+              var $ = function(id) { return document.getElementById(id); };
+              var staffList = [];
+
+              var showEmplooy = function() {
+                  var list = "";
+                  var display = ""; 
+                  //--------------------Check data storage staffList------------------------
+                  if (staffList.length === 0 ) {
+                    var stList = localStorage.getItem("staffList") || "[]";
+                        staffList = JSON.parse(stList);
+                        if (staffList.length > 0) {
+                           staffList.sort();
+                           list = staffList.join("\n");  
+                        }
+
+                        for (var i = 0; i < staffList.length; i++) {
+                           
+                            //$("item").innerHTML = `${staffList[i].name}` + " " + `${staffList[i].phone}`;
+                            display += `${staffList[i].name}` + "    "  + `${staffList[i].phone}` + "   "  + `${staffList[i].mail}` +
+                            + "    " + `${staffList[i].age}` + "    " + `${staffList[i].salary}` + "<br>";
+
+                            
+                            var row = $("table").insertRow(i+1);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3);
+                            var cell5 = row.insertCell(4);
+                            var cell6 = row.insertCell(5);
+                                cell1.innerHTML = `${staffList[i].name}`;
+                                cell2.innerHTML =`${staffList[i].phone}`;
+                                cell3.innerHTML = `${staffList[i].mail}`;
+                                cell4.innerHTML =`${staffList[i].age}`;
+                                cell5.innerHTML = `${staffList[i].salary}`;
+                                cell6.innerHTML =`${staffList[i].salary}`;
+                            //$("itemName").innerHTML = display;
+                            //$("itemPhone").innerHTML = display;
+                            
+                            //$("listName").value = display;
+                            //$("table").append( '"<tr>Your code</tr>"' );
+                           
+                                //cell2.innerHTML = "NEW CELL2";
+                            //$("item").append.innerHTML="Add HTML"
+                            //$("item").append.innerHTML=
+                           
+                        }
+                        //$("table").append("<tr><td>aaaa</td></tr>");
+                        /*for ( i = 0; i < 3 ; i++){
+                            var row = $("table").insertRow(i);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                                cell1.innerHTML = "Name";
+                                cell2.innerHTML = "Phone";
+
+                        }*/
+
+                        /*var li = document.createElement("li");
+                        var text = document.createTextNode(data);
+                        li.appendChild(text);
+                        ul.appendChild(li)*/
+                 
+                  } 
+              };
+              //------------------CREATE STAFF OBJECT----------------------------------
+              var addStaff = function(){
+                var staffName = $("name");
+                var staffPhone = $("phone");
+                var staffMail = $("mail");
+                var staffAge = $("age");
+                var staffSalary = $("salary");
+                var n = staffName.value;
+                var ph = staffPhone.value;
+                var m = staffMail.value;
+                var a = staffAge.value;
+                var s = staffSalary.value;
+
+                var staff = {
+                            "name": n,
+                            "phone": ph,
+                            "mail": m,
+                            "age": a,
+                            "salary": s
+                          }
+
+                 staffList.push(staff); 
+                 localStorage.setItem("staffList", JSON.stringify(staffList));
+                   
+                   staffName.value = "";
+                   staffPhone.value = "";
+                   staffMail.value = "";
+                   staffAge.value = "";
+                   staffSalary.value = "";
+                   //staffName.focus();
+                   showEmplooy();   
+              }
+
+              //-------------------------------------------------------
+              window.onload = function(){
+                  //$("save").onclick = addEmplooy;
+                  //$("show").onclick = showEmplooy;
+                  $("addStaff").onclick = addStaff;
+                  showEmplooy();
+              }
+       </script>
+    </body>
+</html>
